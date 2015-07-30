@@ -31,7 +31,7 @@ class RefResolver
     protected static $depth = 0;
 
     /**
-     * maximum references depth
+     * default maximum references depth
      * @var integer
      */
     public static $maxDepth = 7;
@@ -47,6 +47,19 @@ class RefResolver
     public function __construct($retriever = null)
     {
         $this->uriRetriever = $retriever;
+    }
+
+    /**
+     * Set the maximum reference depth
+     * @param $depth
+     */
+    public function setMaxDepth($depth)
+    {
+        if (!is_numeric($depth)) {
+            throw new \InvalidArgumentException('Expected depth to be numeric');
+        }
+
+        self::$maxDepth = $depth;
     }
 
     /**
